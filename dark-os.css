@@ -1,0 +1,493 @@
+/* DarkGPT — Dark OS layer
+   Workspaces · Artefacts · Profils · Local-first · Discord */
+
+:root {
+  --dos-panel: 320px;
+}
+
+/* Shell 3 colonnes quand artefacts ouverts */
+.app-shell--gpt.has-artifacts {
+  grid-template-columns: var(--dg-sidebar) minmax(0, 1fr) var(--dos-panel) !important;
+}
+
+/* Profiles / dureté retirés de l’UI */
+.dos-workspaces,
+.dos-profiles,
+.dos-hardness {
+  display: none !important;
+}
+
+.dos-workspaces__label {
+  margin: 0;
+  padding: 0 4px;
+  font-size: 0.65rem;
+  font-weight: 650;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--dg-muted);
+}
+
+.dos-workspaces__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+
+.dos-ws {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 10px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--dg-muted);
+  font: 550 0.72rem/1.2 var(--dg-font);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 160ms ease, background 160ms ease, color 160ms ease;
+}
+
+.dos-ws:hover {
+  color: #fff;
+  border-color: rgba(255, 59, 92, 0.3);
+  background: rgba(255, 59, 92, 0.06);
+}
+
+.dos-ws.is-active {
+  color: #fff;
+  border-color: rgba(255, 59, 92, 0.45);
+  background: rgba(255, 59, 92, 0.12);
+}
+
+.dos-ws__ico {
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+.dos-ws__name {
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+/* Local-first badge */
+.dos-local-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  background: rgba(74, 222, 128, 0.08);
+  color: #86efac;
+  font: 550 0.68rem/1 var(--dg-font);
+  white-space: nowrap;
+}
+
+.dos-local-badge__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 8px rgba(74, 222, 128, 0.6);
+}
+
+.dos-local-badge.is-offline {
+  border-color: rgba(255, 59, 92, 0.3);
+  background: rgba(255, 59, 92, 0.08);
+  color: #ff8a9a;
+}
+
+.dos-local-badge.is-offline .dos-local-badge__dot {
+  background: var(--dg-accent);
+  box-shadow: 0 0 8px rgba(255, 59, 92, 0.5);
+}
+
+/* Hardness slider */
+.dos-hardness {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 4px 8px;
+  width: min(760px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+.dos-hardness__label {
+  font-size: 0.72rem;
+  font-weight: 550;
+  color: var(--dg-muted);
+  white-space: nowrap;
+}
+
+.dos-hardness__value {
+  min-width: 28px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--dg-accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.dos-hardness__range {
+  flex: 1;
+  appearance: none;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08);
+  outline: none;
+  cursor: pointer;
+}
+
+.dos-hardness__range::-webkit-slider-thumb {
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--dg-accent);
+  box-shadow: 0 0 12px rgba(255, 59, 92, 0.45);
+  cursor: pointer;
+}
+
+/* Mode profiles strip */
+.dos-profiles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  width: min(760px, calc(100% - 48px));
+  margin: 0 auto 8px;
+  justify-content: center;
+}
+
+.dos-profile {
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: transparent;
+  color: var(--dg-muted);
+  font: 550 0.72rem/1 var(--dg-font);
+  cursor: pointer;
+  transition: all 160ms ease;
+}
+
+.dos-profile:hover {
+  color: #fff;
+  border-color: rgba(255, 59, 92, 0.3);
+}
+
+.dos-profile.is-active {
+  color: #fff;
+  border-color: rgba(255, 59, 92, 0.4);
+  background: rgba(255, 59, 92, 0.12);
+}
+
+/* Empty Dark OS */
+.app-empty__eyebrow {
+  margin: 0 0 10px;
+  font-size: 0.72rem;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--dg-accent);
+  text-align: center;
+}
+
+.app-empty__sub {
+  margin: -8px 0 0;
+  max-width: 420px;
+  text-align: center;
+  font-size: 0.92rem;
+  color: var(--dg-muted);
+  line-height: 1.45;
+}
+
+/* Artifacts panel */
+.dos-artifacts {
+  display: none;
+  flex-direction: column;
+  min-height: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(10, 10, 10, 0.92);
+  backdrop-filter: blur(16px);
+  z-index: 2;
+}
+
+.app-shell--gpt.has-artifacts .dos-artifacts {
+  display: flex;
+}
+
+.dos-artifacts__head {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  height: 58px;
+  padding: 0 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.dos-artifacts__title {
+  margin: 0;
+  font-size: 0.84rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.dos-artifacts__close {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: transparent;
+  color: var(--dg-muted);
+  cursor: pointer;
+}
+
+.dos-artifacts__close:hover {
+  color: #fff;
+  border-color: rgba(255, 59, 92, 0.35);
+}
+
+.dos-artifacts__body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.dos-artifacts__empty {
+  margin: 40px 12px;
+  text-align: center;
+  color: var(--dg-muted);
+  font-size: 0.84rem;
+  line-height: 1.45;
+}
+
+.dos-artifact {
+  border: 1px solid rgba(255, 59, 92, 0.2);
+  border-radius: 14px;
+  background: rgba(17, 17, 17, 0.85);
+  overflow: hidden;
+}
+
+.dos-artifact__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 59, 92, 0.06);
+}
+
+.dos-artifact__lang {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dg-accent);
+}
+
+.dos-artifact__copy {
+  height: 26px;
+  padding: 0 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: var(--dg-muted);
+  font: 550 0.68rem/1 var(--dg-font);
+  cursor: pointer;
+}
+
+.dos-artifact__copy:hover {
+  color: #fff;
+  border-color: rgba(255, 59, 92, 0.35);
+}
+
+.dos-artifact pre {
+  margin: 0;
+  padding: 12px;
+  max-height: 280px;
+  overflow: auto;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+/* Topbar tools */
+.dos-top-tools {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dos-icon-btn {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--dg-muted);
+  cursor: pointer;
+  transition: color 160ms, border-color 160ms, background 160ms;
+}
+
+.dos-icon-btn:hover,
+.dos-icon-btn.is-on {
+  color: #fff;
+  border-color: rgba(255, 59, 92, 0.4);
+  background: rgba(255, 59, 92, 0.1);
+}
+
+/* Discord CTA sidebar */
+.dos-discord {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 38px;
+  margin-bottom: 4px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 59, 92, 0.25);
+  background: rgba(255, 59, 92, 0.08);
+  color: #fff;
+  font: 600 0.8rem/1 var(--dg-font);
+  text-decoration: none;
+  transition: background 160ms, border-color 160ms;
+}
+
+.dos-discord:hover {
+  background: rgba(255, 59, 92, 0.16);
+  border-color: rgba(255, 59, 92, 0.45);
+}
+
+/* Pricing Dark OS */
+.pricing-grid--dos {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  align-items: stretch;
+}
+
+.price-card--dos .price-eyebrow {
+  margin: 0 0 8px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #ff3b5c;
+}
+
+.price-card--night {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.price-card--red {
+  border-color: rgba(255, 59, 92, 0.35);
+}
+
+.price-card--black {
+  border-color: rgba(255, 59, 92, 0.55);
+  box-shadow: 0 0 40px rgba(255, 59, 92, 0.12);
+}
+
+@media (max-width: 1100px) {
+  .app-shell--gpt.has-artifacts {
+    grid-template-columns: var(--dg-sidebar) minmax(0, 1fr) !important;
+  }
+
+  .dos-artifacts {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: min(360px, 92vw);
+    z-index: 60;
+    box-shadow: -20px 0 60px rgba(0, 0, 0, 0.5);
+  }
+
+  .pricing-grid--dos {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 960px) {
+  .dos-profiles,
+  .dos-hardness {
+    width: calc(100% - 24px);
+  }
+}
+
+.pricing-grid--dos.pricing-grid--two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 820px;
+  margin-left: auto;
+  margin-right: auto;
+  gap: 22px;
+}
+
+.price-hook {
+  margin: 0 0 18px;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.price-badge--black {
+  background: rgba(255, 59, 92, 0.2) !important;
+  border-color: rgba(255, 59, 92, 0.45) !important;
+}
+
+.pricing-discord-strip {
+  margin-top: 36px;
+}
+
+.pricing-discord-strip__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 22px 26px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.pricing-discord-strip__title {
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.pricing-discord-strip__text {
+  margin: 0;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.4;
+}
+
+.pricing-discord-strip__btn {
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  .pricing-grid--dos.pricing-grid--two {
+    grid-template-columns: 1fr;
+  }
+  .pricing-discord-strip__inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
